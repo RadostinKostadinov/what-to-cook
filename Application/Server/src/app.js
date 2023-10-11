@@ -4,6 +4,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 import compression from 'compression';
 import cors from 'cors';
 import httpStatus from 'http-status';
+import cookieParser from 'cookie-parser';
 import { errorConverter, errorHandler } from './middlewares/error.js';
 import { ApiError } from './utils/error_handler/index.js';
 
@@ -13,6 +14,9 @@ const app = express();
 
 // Set security HTTP headers
 app.use(helmet());
+
+// Set cookie parser
+app.use(cookieParser());
 
 // Parse requests of content-type - application/json
 app.use(express.json());
@@ -38,12 +42,7 @@ app.use('/api', routes);
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
-  next(
-    new ApiError({
-      statusCode: httpStatus.NOT_FOUND,
-      message: 'Invalid route',
-    })
-  );
+  next(new ApiError('INVALID_ROUTE', httpStatus.NOT_FOUND));
 });
 
 // convert error to ApiError, if needed

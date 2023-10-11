@@ -1,24 +1,19 @@
 import httpStatus from 'http-status';
 import BaseError from './BaseError.js';
 
-export default class ApiError extends BaseError {
+export default class DatabaseError extends BaseError {
   type;
 
   /**
-   * ApiError
+   * DatabaseError
    * @param {string} name - Custom error name
    * @param {string} httpCode
    * @param {boolean} isOperational - Is operational(true) or programmer(false) error
    * @param {description} description - Custom error description
    * @returns {Error}
    */
-  constructor(
-    name,
-    httpCode = httpStatus.INTERNAL_SERVER_ERROR,
-    isOperational = true,
-    description = httpStatus[httpCode]
-  ) {
+  constructor(name, httpCode = httpStatus.BAD_REQUEST, isOperational = true, description = httpStatus[httpCode]) {
     super(name, httpCode, isOperational, description);
-    this.type = 'API_ERROR';
+    this.type = 'DATABASE_ERROR';
   }
 }

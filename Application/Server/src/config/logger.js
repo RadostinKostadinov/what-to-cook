@@ -20,8 +20,18 @@ const customLevels = {
   },
 };
 
-const formatter = winston.format.combine(
+const formatterConsole = winston.format.combine(
   winston.format.colorize(),
+  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+  winston.format.splat(),
+  winston.format.printf((info) => {
+    const { timestamp, level, message } = info;
+
+    return `${timestamp} [${level}]: ${message}`;
+  })
+);
+
+const formatterFile = winston.format.combine(
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   winston.format.splat(),
   winston.format.printf((info) => {
@@ -36,18 +46,24 @@ class Logger {
 
   constructor() {
     const prodTransport = new winston.transports.File({
-      filename: 'logs/error.log',
+      filename: 'logs/production_errors.log',
       level: 'error',
+      format: formatterFile,
     });
 
-    const transport = new winston.transports.Console({
-      format: formatter,
+    const transportDevLog = new winston.transports.File({
+      filename: 'logs/development_errors.log',
+      format: formatterFile,
+    });
+
+    const transportDevConsole = new winston.transports.Console({
+      format: formatterConsole,
     });
 
     this.#logger = winston.createLogger({
       level: config.env === 'development' ? 'trace' : 'error',
       levels: customLevels.levels,
-      transports: [config.env === 'development' ? transport : prodTransport],
+      transports: config.env === 'development' ? [transportDevConsole, transportDevLog] : [prodTransport],
     });
 
     winston.addColors(customLevels.colors);

@@ -1,15 +1,17 @@
 import express from 'express';
 
 import docsRoute from './swagger.route.js';
+import authRoute from './auth.route.js';
+
 import { config } from '../config/index.js';
 
 const router = express.Router();
 
 const defaultRoutes = [
-  // {
-  //   path: '/auth',
-  //   route: authRoute,
-  // },
+  {
+    path: '/auth',
+    route: authRoute,
+  },
 ];
 
 // Routes that will be available only in development environment

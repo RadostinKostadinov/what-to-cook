@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
     },
+    isEmailVerified: {
+      type: Boolean,
+      default: false,
+    },
     fridge: {
       type: [productInFridge],
       default: [],
@@ -54,7 +58,7 @@ const userSchema = new mongoose.Schema(
        * @returns {Promise<boolean>}
        */
       async isPasswordMatch(password) {
-        const user = this;
+        const user = await User.findOne({ email: this.email }, { password: 1 }).exec();
         return bcrypt.compare(password, user.password);
       },
     },
@@ -65,8 +69,8 @@ const userSchema = new mongoose.Schema(
        * @param {ObjectId} [excludeUserId] - The id of the user to be excluded
        * @returns {Promise<boolean>}
        */
-      async isEmailTaken(email, userId = null) {
-        const user = await this.findOne(userId ? { email, _id: userId } : { email });
+      async isEmailTaken(email, excludeUserId) {
+        const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
         return !!user;
       },
     },

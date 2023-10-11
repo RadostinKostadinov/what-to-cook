@@ -15,27 +15,27 @@ export const errorConverter = (err, req, res, next) => {
   next(error);
 };
 
-export const errorHandler = (err, req, res) => {
-  let { statusCode, message } = err;
+// eslint-disable-next-line no-unused-vars
+export const errorHandler = (err, req, res, next) => {
+  let { httpCode, message } = err;
   if (config.env === 'production' && !err.isOperational) {
-    statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+    httpCode = httpStatus.INTERNAL_SERVER_ERROR;
     message = httpStatus[httpStatus.INTERNAL_SERVER_ERROR];
 
-    logger.error(err.name, err);
+    logger.error(`[${err.type}], ${err.name}, ${err.httpCode}`, { stack: err.stack });
     // TODO: Send email to admin
   }
 
   res.locals.errorMessage = err.message;
 
   const response = {
-    code: statusCode,
+    code: httpCode,
     message,
     ...(config.env === 'development' && { stack: err.stack }),
   };
 
   if (config.env === 'development') {
-    logger.error(err);
+    logger.error(`[${err.type}][${err.httpCode}], ${err.name} - ${err.message} `, { stack: err.stack });
   }
-
-  res.status(statusCode).send(response);
+  res.status(httpCode).send(response);
 };
