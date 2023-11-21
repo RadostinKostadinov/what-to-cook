@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import httpStatus from 'http-status';
 import selectProperties from '../utils/selectProperties.js';
-import ApiError from '../utils/error_handler/error_types/ApiError.js';
+import ValidationError from '../utils/error_handler/error_types/ValidationError.js';
 
 export const validateReqData = (schema) => (req, res, next) => {
   // Gets validation schema for http request
@@ -16,8 +16,21 @@ export const validateReqData = (schema) => (req, res, next) => {
     .validate(object);
 
   if (error) {
-    const errorMessage = error.details.map((details) => details.message).join(', ');
-    return next(new ApiError('REQUEST_DATA_VALIDATION_FAILED', httpStatus.BAD_REQUEST, true, errorMessage));
+    const errors = error.details.map((details) => {
+      return {
+        label: details.context.label,
+        message: details.message,
+      };
+    });
+    return next(
+      new ValidationError(
+        'REQUEST_DATA_VALIDATION_FAILED',
+        httpStatus.BAD_REQUEST,
+        true,
+        'Request data validation failed.',
+        errors
+      )
+    );
   }
 
   Object.assign(req, { validatedData });

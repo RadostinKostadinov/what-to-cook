@@ -12,6 +12,7 @@ const router = express.Router();
 router.post('/register', validateReqData(userValidations.createUser), authController.registerUser);
 router.post('/refresh', authController.refresh);
 router.post('/login', validateReqData(authValidations.login), authController.login);
+router.get('/logout', isAuthenticated, authController.logout);
 
 router.get('/test', isAuthenticated, (req, res) => {
   res

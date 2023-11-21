@@ -1,0 +1,9 @@
+{
+  "\"email\" is not allowed to be empty": "Моля, попълнете полето 'имейл'.",
+  "\"password\" is not allowed to be empty": "Моля, попълнете полето 'парола'.",
+  "password must be at least 8 characters": "Паролата трябва да е поне 8 символа.",
+  "password must contain at least 1 letter and 1 number": "Паролата трябва да съдържа поне една буква и една цифра.",
+  "Incorrect email or password": "Грешен имейл или парола.",
+  "Password must be at least 8 characters long and must contain at least 1 letter and 1 number": "Паролата трябва да е с дължина поне 8 символа и да съдържа поне една буква и една цифра.",
+  "Please enter a valid email": "Моля, въведете валиден имейл адрес."
+}

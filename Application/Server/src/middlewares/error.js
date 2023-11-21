@@ -31,6 +31,7 @@ export const errorHandler = (err, req, res, next) => {
   const response = {
     code: httpCode,
     message,
+    data: err.data || [],
     ...(config.env === 'development' && { stack: err.stack }),
   };
 

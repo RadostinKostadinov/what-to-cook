@@ -73,7 +73,7 @@ export const verifyToken = async (token, type, withoutDatabase = false) => {
   try {
     payload = jwt.verify(token, config.jwt.secret);
   } catch (err) {
-    throw new ApiError('VERIFY_TOKEN__INVALID_TOKEN', httpStatus.UNAUTHORIZED, true, 'Unauthorized.');
+    throw new ApiError('VERIFY_TOKEN__INVALID_TOKEN', httpStatus.UNAUTHORIZED, true, 'Invalid token.');
   }
 
   if (withoutDatabase) {
@@ -86,6 +86,7 @@ export const verifyToken = async (token, type, withoutDatabase = false) => {
     user: payload.user.id,
     blacklisted: false,
   }).exec();
+
   if (!tokenDoc) {
     throw new DatabaseError(
       'VERIFY_TOKEN__INVALID_TOKEN_DATA',

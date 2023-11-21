@@ -1,0 +1,9 @@
+{
+  "\"email\" is not allowed to be empty": "Email is not allowed to be empty",
+  "\"password\" is not allowed to be empty": "Password is not allowed to be empty.",
+  "password must be at least 8 characters": "Password must be at least 8 characters.",
+  "password must contain at least 1 letter and 1 number": "Password must contain at least 1 letter and 1 number.",
+  "Incorrect email or password": "Incorrect email or password.",
+  "Password must be at least 8 characters long and must contain at least 1 letter and 1 number": "Password must be at least 8 characters long and must contain at least 1 letter and 1 number.",
+  "Please enter a valid email": "Please enter a valid email address."
+}
