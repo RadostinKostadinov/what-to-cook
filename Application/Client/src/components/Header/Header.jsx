@@ -31,7 +31,7 @@ export default function Header() {
         </div>
       </header>
       {isHeaderOpened && (
-        <div className="w-full h-full top-0 bg-app-lightBlue bg-opacity-40 absolute z-40 pt-18">
+        <div className="w-full h-full top-0 bg-app-lightBlue bg-opacity-100 absolute z-40 pt-18">
           <div className="relative py-28 flex flex-col justify-between items-center h-full">
             <div className="absolute top-12">
               <MultiLangSelect />

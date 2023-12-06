@@ -5,5 +5,9 @@
   "password must contain at least 1 letter and 1 number": "Password must contain at least 1 letter and 1 number.",
   "Incorrect email or password": "Incorrect email or password.",
   "Password must be at least 8 characters long and must contain at least 1 letter and 1 number": "Password must be at least 8 characters long and must contain at least 1 letter and 1 number.",
-  "Please enter a valid email": "Please enter a valid email address."
+  "Please enter a valid email": "Please enter a valid email address.",
+  "Please, confirm that you agree to the site's policy": "Please, confirm that you agree to the site's policy",
+  "Please fill out this field": "Please fill out this field.",
+  "Please match the requested format.": "Please match the requested format.",
+  "Email already taken": "This email is already taken."
 }

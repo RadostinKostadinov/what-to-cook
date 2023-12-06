@@ -12,7 +12,7 @@ export const isAuthenticated = catchAsync(async (req, res, next) => {
 
   const { accessToken } = cookies;
 
-  const payload = tokenService.verifyToken(accessToken, null, true);
+  const payload = await tokenService.verifyToken(accessToken, null, true);
 
   Object.assign(req, { user: payload.user });
   next();

@@ -2,6 +2,7 @@ import express from 'express';
 
 import docsRoute from './swagger.route.js';
 import authRoute from './auth.route.js';
+import userRoute from './user.route.js';
 
 import { config } from '../config/index.js';
 
@@ -11,6 +12,10 @@ const defaultRoutes = [
   {
     path: '/auth',
     route: authRoute,
+  },
+  {
+    path: '/user',
+    route: userRoute,
   },
 ];
 

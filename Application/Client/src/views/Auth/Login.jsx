@@ -99,7 +99,7 @@ export default function Login() {
       <div className="text-center mt-8 md:mt-4">
         <p className="text-white">Нямате регистрация?</p>
         <p className="text-white">Може да се регистрирате от тук</p>
-        <Link className="button-white w-56 mx-auto mt-2" to="/register">
+        <Link className="button-white w-56 mx-auto mt-2" to="/auth/register">
           Регистрация
         </Link>
       </div>
@@ -116,7 +116,7 @@ export async function action({ request, params, context }) {
   const credentials = { email, password };
 
   try {
-    const api = await HttpService.getInstance();
+    const api = HttpService.getInstance();
     await api.User.sendLoginRequest(credentials);
 
     return redirect("/");

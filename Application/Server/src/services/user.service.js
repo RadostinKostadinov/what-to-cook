@@ -6,7 +6,9 @@ import DatabaseError from '../utils/error_handler/error_types/DatabaseError.js';
 
 export const createUser = async (userBody) => {
   if (await User.isEmailTaken(userBody.email)) {
-    throw new ApiError('CREATE_USER__EMAIL_TAKEN', httpStatus.BAD_REQUEST, true, 'Email already taken');
+    throw new ApiError('CREATE_USER__EMAIL_TAKEN', httpStatus.BAD_REQUEST, true, 'Email already taken', [
+      { label: 'email', message: 'Email already taken' },
+    ]);
   }
 
   try {

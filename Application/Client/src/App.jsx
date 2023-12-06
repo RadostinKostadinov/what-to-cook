@@ -21,6 +21,9 @@ import Login, {
 import AuthLayout from "./layouts/AuthLayout";
 import "./services/multilang-i18n/i18n.js";
 import { Suspense } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,9 +51,11 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <Suspense fallback="loading">
-      <RouterProvider router={router} />;
-    </Suspense>
+    <QueryClientProvider client={queryClient}>
+      <Suspense fallback="loading">
+        <RouterProvider router={router} />
+      </Suspense>
+    </QueryClientProvider>
   );
 }
 

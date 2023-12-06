@@ -16,6 +16,7 @@ export default class UserHttpService {
     if (ENV === "development") {
       console.log("This is a private constructor! Use getInstance() instead.");
     }
+    this.getCurrentUser = this.getCurrentUser.bind(this);
   }
 
   async sendLoginRequest(data) {
@@ -34,7 +35,7 @@ export default class UserHttpService {
 
       return response.data;
     } catch (err) {
-      throw err.message;
+      throw err.response.data;
     }
   }
 
@@ -51,6 +52,16 @@ export default class UserHttpService {
   async sendLogoutRequest(data) {
     try {
       const response = await this.api.get("/api/auth/logout");
+
+      return response.data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+
+  async getCurrentUser() {
+    try {
+      const response = await this.api.get("/api/user/me");
 
       return response.data;
     } catch (err) {
