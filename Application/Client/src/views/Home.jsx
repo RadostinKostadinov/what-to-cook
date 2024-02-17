@@ -25,7 +25,7 @@ const DisplayedButtons = [
 ];
 
 export default function Home() {
-  const { isLoading, error, data } = useCurrentUser();
+  const { isLoading, error, data: currentUser } = useCurrentUser();
 
   if (isLoading) return <div className="pt-20 text-center">Loading...</div>;
   if (error)
@@ -39,12 +39,13 @@ export default function Home() {
     <div className="pt-20 text-center flex flex-col justify-around h-screen">
       <h2>
         Здравей,
-        <br /> {data.data.username}
+        <br /> {currentUser.data.username}
       </h2>
 
       {DisplayedButtons.map((info) => {
         return (
           <ButtonWith2ParagraphsAbove
+            key={info.buttonText}
             p1={info.heading}
             p2={info.paragraph}
             linkTo={info.forwardTo}

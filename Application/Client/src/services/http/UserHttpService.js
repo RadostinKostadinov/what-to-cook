@@ -17,6 +17,7 @@ export default class UserHttpService {
       console.log("This is a private constructor! Use getInstance() instead.");
     }
     this.getCurrentUser = this.getCurrentUser.bind(this);
+    this.getCurrentUserFridge = this.getCurrentUserFridge.bind(this);
   }
 
   async sendLoginRequest(data) {
@@ -62,6 +63,16 @@ export default class UserHttpService {
   async getCurrentUser() {
     try {
       const response = await this.api.get("/api/user/me");
+
+      return response.data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+
+  async getCurrentUserFridge() {
+    try {
+      const response = await this.api.get("/api/user/me/fridge");
 
       return response.data;
     } catch (err) {

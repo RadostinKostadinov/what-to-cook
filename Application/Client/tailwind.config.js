@@ -22,6 +22,23 @@ module.exports = {
       boxShadow: {
         header: "0px 5px 8px 0px rgba(0, 0, 0, 0.25)",
       },
+      // that is animation class
+      animation: {
+        fadeInBackground: "fadeInBackground 200ms ease-in-out",
+        slideInFromBottom: "slideInFromBottom 400ms ease-in-out",
+      },
+
+      // that is actual animation
+      keyframes: (theme) => ({
+        fadeInBackground: {
+          "0%": { backgroundColor: theme("colors.transparent") },
+          "100%": { backgroundColor: theme("colors.app-lightBlue40") },
+        },
+        slideInFromBottom: {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0px)" },
+        },
+      }),
     },
     colors: {
       ...colors,
@@ -30,6 +47,7 @@ module.exports = {
       "app-yellow": "#E9C46A",
       "app-lightBlue": "#2A9D8F",
       "app-darkBlue": "#264653",
+      "app-lightBlue40": "rgba(42,157,143,40%)",
     },
   },
   plugins: [],

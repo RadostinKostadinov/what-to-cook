@@ -7,6 +7,7 @@ import {
 
 import "./App.css";
 import Home from "./views/Home";
+import Fridge from "./views/Fridge.jsx";
 import RootLayout from "./layouts/RootLayout";
 import Register from "./views/Auth/Register";
 import ForgotPassword from "./views/Auth/ForgotPassword";
@@ -30,7 +31,12 @@ const router = createBrowserRouter(
     <>
       <Route path="/" element={<RootLayout />} loader={AuthLoader}>
         <Route index element={<Home />} />
-        <Route path="fridge" element={<ForgotPassword />} />
+        <Route path="fridge">
+          <Route index element={<Fridge />} />
+          <Route path="low-amount" element={<ForgotPassword />} />
+          <Route path="history" element={<ForgotPassword />} />
+          <Route path="add" element={<ForgotPassword />} />
+        </Route>
         <Route path="my-recipes" element={<ForgotPassword />} />
         <Route path="find-recipe" element={<ForgotPassword />} />
       </Route>

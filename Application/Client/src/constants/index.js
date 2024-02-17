@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:8810";
+export const API_URL = "http://172.20.10.7:8810";
 
 export const ENV = "production";
 

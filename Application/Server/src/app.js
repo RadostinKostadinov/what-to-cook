@@ -32,7 +32,8 @@ app.use(compression());
 
 // Cors options
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  // origin: 'http://localhost:3000',
+  origin: true,
   credentials: true,
 };
 
