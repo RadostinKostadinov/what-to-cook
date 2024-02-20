@@ -1,5 +1,6 @@
 import { ENV } from "../../constants";
 import AxiosSingleton from "./AxiosSingleton";
+import ProductHttpService from "./ProductHttpService";
 import UserHttpService from "./UserHttpService";
 
 export default class HttpService {
@@ -11,6 +12,7 @@ export default class HttpService {
 
       this.#instance = new HttpService();
       this.#instance.User = UserHttpService.getInstance(api);
+      this.#instance.Product = ProductHttpService.getInstance(api);
     }
     return this.#instance;
   }

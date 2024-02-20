@@ -4,7 +4,10 @@ import TextInput from "../TextInput";
 import TextInputWithMeasurementUnit from "../TextInputWithMeasurementUnit";
 import Button from "../Button";
 
-export default function AddProductBottomSheet({ setIsOpened }) {
+export default function AddProductBottomSheet({
+  setIsOpened,
+  setIsCreateProductOpened,
+}) {
   const [productToSearchFor, setProductToSearchFor] = useState("");
   const [productAmount, setProductAmount] = useState("");
   const [alertAmount, setAlertAmount] = useState("");
@@ -15,11 +18,22 @@ export default function AddProductBottomSheet({ setIsOpened }) {
         label="Продукт"
         placeholder="Въведете име на продукт"
         value={productToSearchFor}
-        setValue={setProductToSearchFor}
+        onChange={(e) => {
+          setProductToSearchFor(e.target.value);
+        }}
       ></TextInput>
       <p className="font-montserrat italic text-center text-sm text-app-darkBlue mt-2">
         Ако не откривате даден продукт, може<br></br>да го добавите към списъка
-        от <button className="italic underline text-app-lightBlue">тук.</button>
+        от{" "}
+        <button
+          className="italic underline text-app-lightBlue"
+          onClick={(e) => {
+            setIsOpened(false);
+            setIsCreateProductOpened(true);
+          }}
+        >
+          тук.
+        </button>
       </p>
       <TextInputWithMeasurementUnit
         className="mt-8"

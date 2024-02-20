@@ -6,11 +6,13 @@ import Title from "../components/Title";
 import BottomSheet from "../components/BottomSheet";
 import TextInputWithMeasurementUnit from "../components/TextInputWithMeasurementUnit";
 import AddProductBottomSheet from "../components/Fridge/AddProductBottomSheet";
+import CreateProductBottomSheet from "../components/Fridge/CreateProductBottomSheet";
 
 export default function Fridge() {
   const { isLoading, error, data: fridge } = useCurrentUserFridge();
   const [productToSearchFor, setProductToSearchFor] = useState("");
   const [isAddProductOpened, setIsAddProductOpened] = useState(false);
+  const [isCreateProductOpened, setIsCreateProductOpened] = useState(false);
 
   const DisplayedButtons = [
     {
@@ -56,7 +58,9 @@ export default function Fridge() {
           label="Търси"
           placeholder="Въведете име на продукт"
           value={productToSearchFor}
-          setValue={setProductToSearchFor}
+          onChange={(e) => {
+            setProductToSearchFor(e.target.value);
+          }}
         ></TextInput>
       </div>
       <div className="w-11/12 mx-auto pt-10">
@@ -72,7 +76,15 @@ export default function Fridge() {
       {isAddProductOpened ? (
         <AddProductBottomSheet
           setIsOpened={setIsAddProductOpened}
+          setIsCreateProductOpened={setIsCreateProductOpened}
         ></AddProductBottomSheet>
+      ) : (
+        ""
+      )}
+      {isCreateProductOpened ? (
+        <CreateProductBottomSheet
+          setIsOpened={setIsCreateProductOpened}
+        ></CreateProductBottomSheet>
       ) : (
         ""
       )}

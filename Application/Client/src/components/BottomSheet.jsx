@@ -1,7 +1,7 @@
 export default function BottomSheet({ setIsOpened, children }) {
   return (
     <div
-      className="absolute top-0 left-0 w-screen h-screen animate-fadeInBackground bg-app-lightBlue40 z-50"
+      className="absolute top-0 left-0 w-full h-screen animate-fadeInBackground bg-app-lightBlue40 z-50 overflow-hidden"
       onClick={(e) => {
         setIsOpened(false);
       }}

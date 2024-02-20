@@ -1,11 +1,19 @@
-import { Link } from "react-router-dom";
-
-export default function Button({ btnText, clickEvent, className }) {
+export default function Button({
+  btnText,
+  className,
+  type = "button",
+  disabled = false,
+  clickEvent = false,
+}) {
   return (
     <button
       className={"button-orange w-8/12 " + className}
+      disabled={disabled}
+      type={type}
       onClick={(e) => {
-        clickEvent();
+        if (clickEvent) {
+          clickEvent(e);
+        }
       }}
     >
       {btnText}
