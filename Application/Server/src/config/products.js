@@ -3,4 +3,9 @@ const productMeasurementUnits = {
   liter: 'литър',
 };
 
-export default { productMeasurementUnits };
+const measurementUnitMappings = {
+  килограм: 'кг',
+  литър: 'л',
+};
+
+export default { productMeasurementUnits, measurementUnitMappings };

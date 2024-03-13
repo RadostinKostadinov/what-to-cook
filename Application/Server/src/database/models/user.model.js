@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 import productInFridge from '../schemas/productInFridge.schema.js';
+import actionInFridge from '../schemas/actionInFridge.schema.js';
 import toJSON from '../plugins/toJSON.plugin.js';
 
 const userSchema = new mongoose.Schema(
@@ -29,8 +30,12 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     fridge: {
-      type: [productInFridge],
-      default: [],
+      type: {
+        _id: { _id: false },
+        products: [productInFridge],
+        activity: [actionInFridge],
+      },
+      default: {},
     },
     ownRecipes: {
       type: [],

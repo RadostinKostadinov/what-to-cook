@@ -5,10 +5,15 @@ import ValidationError from '../utils/error_handler/error_types/ValidationError.
 
 export const validateReqData = (schema) => (req, res, next) => {
   // Gets validation schema for http request
-  const validSchema = selectProperties(schema, ['params', 'query', 'body']);
+  const validSchema = selectProperties(schema, ['params', 'query', 'body', 'file']);
 
   // Selects only params,query,body from the request object
   const object = selectProperties(req, Object.keys(validSchema));
+
+  // Specific config for route [post]/user/, because of formdata request
+  if (req.route.path === '/user/' && req.route.methods.post) {
+    object.body.recipe = JSON.parse(object.body.recipe);
+  }
 
   // Validating request's data
   const { value: validatedData, error } = Joi.compile(validSchema)

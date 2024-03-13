@@ -25,6 +25,7 @@ const recipeSchema = new mongoose.Schema(
     },
     products: [
       {
+        _id: { _id: 0 },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Product',
@@ -43,6 +44,16 @@ const recipeSchema = new mongoose.Schema(
     category: {
       type: String,
       enum: [],
+      required: true,
+    },
+    group: {
+      type: String,
+      enum: [],
+      required: true,
+    },
+    owner: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'User',
       required: true,
     },
   },

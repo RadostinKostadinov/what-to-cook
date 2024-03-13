@@ -4,9 +4,11 @@ export default function Button({
   type = "button",
   disabled = false,
   clickEvent = false,
+  form = null,
 }) {
   return (
     <button
+      form={form}
       className={"button-orange w-8/12 " + className}
       disabled={disabled}
       type={type}

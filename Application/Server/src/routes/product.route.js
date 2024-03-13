@@ -7,6 +7,7 @@ import * as productValidations from '../validations/product.validation.js';
 
 const router = express.Router();
 
+router.get('/', isAuthenticated, productController.getAllProducts);
 router.post('/', isAuthenticated, validateReqData(productValidations.createProduct), productController.createProduct);
 
 export default router;

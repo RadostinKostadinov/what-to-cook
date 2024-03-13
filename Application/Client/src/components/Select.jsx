@@ -6,7 +6,6 @@ export default function Select({
   placeholder,
   label,
   rhfRegister,
-  errorMessage,
 }) {
   return (
     <div
@@ -35,11 +34,6 @@ export default function Select({
           );
         })}
       </select>
-      {errorMessage ? (
-        <p className="text-app-red">{errorMessage}</p>
-      ) : (
-        <p className="opacity-0">.</p>
-      )}
     </div>
   );
 }

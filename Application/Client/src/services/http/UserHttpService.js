@@ -80,6 +80,36 @@ export default class UserHttpService {
     }
   }
 
+  async addProductToFridge(product) {
+    try {
+      const response = await this.api.post("/api/user/me/fridge", product);
+
+      return response.data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+
+  async updateProductInFridge(product) {
+    try {
+      const response = await this.api.put("/api/user/me/fridge", product);
+
+      return response.data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+
+  async removeProductFromFridge(product) {
+    try {
+      const response = await this.api.patch("/api/user/me/fridge", product);
+
+      return response.data;
+    } catch (err) {
+      throw err.message;
+    }
+  }
+
   async sendTestAuthRequest(data) {
     try {
       const response = await this.api.get("/api/auth/test");

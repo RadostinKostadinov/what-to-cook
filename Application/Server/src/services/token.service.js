@@ -9,7 +9,7 @@ import { ApiError } from '../utils/error_handler/index.js';
 
 export const generateToken = (user, expires, type, secret = config.jwt.secret) => {
   const payload = {
-    user,
+    user: { id: user.id },
     iat: moment().unix(),
     exp: expires.unix(),
     type,

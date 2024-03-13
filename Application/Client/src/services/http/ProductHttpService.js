@@ -16,13 +16,23 @@ export default class ProductHttpService {
     if (ENV === "development") {
       console.log("This is a private constructor! Use getInstance() instead.");
     }
-    // this.getCurrentUser = this.getCurrentUser.bind(this);
+    this.getAllProducts = this.getAllProducts.bind(this);
     // this.getCurrentUserFridge = this.getCurrentUserFridge.bind(this);
   }
 
   async sendCreateProductRequest(data) {
     try {
       const response = await this.api.post("/api/product/", data);
+
+      return response.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+
+  async getAllProducts() {
+    try {
+      const response = await this.api.get("/api/product/");
 
       return response.data;
     } catch (err) {

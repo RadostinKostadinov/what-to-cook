@@ -10,3 +10,12 @@ export const createProduct = catchAsync(async (req, res) => {
 
   return res.status(httpStatus.CREATED).json(unifiedResponse.success(httpStatus.CREATED, 'Product created!', {}));
 });
+
+// Get all products  =>  /api/product/
+export const getAllProducts = catchAsync(async (req, res) => {
+  const allProducts = await productService.getAllProducts();
+
+  return res
+    .status(httpStatus.OK)
+    .json(unifiedResponse.success(httpStatus.OK, 'All products', { products: allProducts }));
+});

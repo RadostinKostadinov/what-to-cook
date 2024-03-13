@@ -26,6 +26,7 @@ module.exports = {
       animation: {
         fadeInBackground: "fadeInBackground 200ms ease-in-out",
         slideInFromBottom: "slideInFromBottom 400ms ease-in-out",
+        slideInFromTop: "slideInFromTop 400ms ease-in-out",
       },
 
       // that is actual animation
@@ -36,6 +37,10 @@ module.exports = {
         },
         slideInFromBottom: {
           "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0px)" },
+        },
+        slideInFromTop: {
+          "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(0px)" },
         },
       }),

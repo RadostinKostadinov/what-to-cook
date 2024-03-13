@@ -8,6 +8,8 @@ import {
 import "./App.css";
 import Home from "./views/Home";
 import Fridge from "./views/Fridge.jsx";
+import { default as FridgeLowAmount } from "./views/Fridge/LowAmount.jsx";
+import { default as FridgeHistory } from "./views/Fridge/History.jsx";
 import RootLayout from "./layouts/RootLayout";
 import Register from "./views/Auth/Register";
 import ForgotPassword from "./views/Auth/ForgotPassword";
@@ -23,6 +25,8 @@ import AuthLayout from "./layouts/AuthLayout";
 import "./services/multilang-i18n/i18n.js";
 import { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MyRecipes from "./views/MyRecipes.jsx";
+import Recipe from "./views/MyRecipes/Recipe.jsx";
 
 const queryClient = new QueryClient();
 
@@ -33,11 +37,13 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="fridge">
           <Route index element={<Fridge />} />
-          <Route path="low-amount" element={<ForgotPassword />} />
-          <Route path="history" element={<ForgotPassword />} />
-          <Route path="add" element={<ForgotPassword />} />
+          <Route path="low-amount" element={<FridgeLowAmount />} />
+          <Route path="history" element={<FridgeHistory />} />
         </Route>
-        <Route path="my-recipes" element={<ForgotPassword />} />
+        <Route path="my-recipes">
+          <Route index element={<MyRecipes />}></Route>
+          <Route path="recipe" element={<Recipe />}></Route>
+        </Route>
         <Route path="find-recipe" element={<ForgotPassword />} />
       </Route>
       <Route

@@ -22,3 +22,17 @@ export const deleteUser = {
     id: Joi.string().custom(mongoId),
   }),
 };
+
+export const addProductToFridge = {
+  body: Joi.object().keys({
+    name: Joi.string().max(80).required(),
+    amount: Joi.number().min(0.001).required(),
+    alertAmount: Joi.number().min(0).required(),
+  }),
+};
+
+export const removeProductFromFridge = {
+  body: Joi.object().keys({
+    name: Joi.string().max(80).required(),
+  }),
+};

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import BottomSheet from "../BottomSheet";
 import TextInput from "../TextInput";
 import Button from "../Button";
@@ -7,6 +7,8 @@ import HttpService from "../../services/http/HttpService";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import { createPortal } from "react-dom";
 
 const productSchema = z.object({
   name: z
@@ -19,6 +21,7 @@ const productSchema = z.object({
 });
 
 export default function CreateProductBottomSheet({ setIsOpened }) {
+  const queryClient = useQueryClient();
   const api = HttpService.getInstance();
   const {
     register,
@@ -32,10 +35,16 @@ export default function CreateProductBottomSheet({ setIsOpened }) {
 
   const onSubmit = async (data) => {
     try {
-      const res = await api.Product.sendCreateProductRequest({
+      await api.Product.sendCreateProductRequest({
         name: data.name,
         measurementUnit: data.measurementUnit,
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ["allProducts"],
+        exact: true,
+      });
+
       reset();
     } catch (err) {
       if (err.message === "Product already exists") {
@@ -49,15 +58,19 @@ export default function CreateProductBottomSheet({ setIsOpened }) {
     }
   };
 
-  return (
+  return createPortal(
     <BottomSheet setIsOpened={setIsOpened}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextInput
           label="Име на продукт"
           placeholder="Въведете име на продукт"
           rhfRegister={register("name")}
-          errorMessage={errors.name ? errors.name.message : ""}
         ></TextInput>
+        {errors.name && (
+          <p className="text-center font-montserrat text-app-red">
+            {errors.name.message}
+          </p>
+        )}
         <Select
           label="Мерна единица"
           id="create-product-measurement-unit"
@@ -65,15 +78,14 @@ export default function CreateProductBottomSheet({ setIsOpened }) {
           values={["килограм", "литър"]}
           placeholder="Изберете"
           rhfRegister={register("measurementUnit")}
-          errorMessage={
-            errors.measurementUnit ? errors.measurementUnit.message : ""
-          }
           className="mt-4"
         ></Select>
+        {errors.measurementUnit && (
+          <p className="text-center font-montserrat text-app-red">
+            {errors.measurementUnit.message}
+          </p>
+        )}
         <div className="flex flex-col w-full items-center justify-center gap-8 mt-8">
-          {!errors.root && !isSubmitSuccessful && (
-            <p className="opacity-0">.</p>
-          )}
           {errors.root && (
             <p className="text-center font-montserrat text-app-red">
               {errors.root.message}
@@ -99,6 +111,7 @@ export default function CreateProductBottomSheet({ setIsOpened }) {
           ></Button>
         </div>
       </form>
-    </BottomSheet>
+    </BottomSheet>,
+    document.body
   );
 }
