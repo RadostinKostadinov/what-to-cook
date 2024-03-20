@@ -9,13 +9,14 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
 import { createPortal } from "react-dom";
+import { measurementUnitMappings } from "../../constants";
 
 const productSchema = z.object({
   name: z
     .string()
     .min(1, "Това поле е задължително.")
     .max(80, "Максимална дължина - 80 символа."),
-  measurementUnit: z.enum(["килограм", "литър"], {
+  measurementUnit: z.enum(Object.keys(measurementUnitMappings), {
     errorMap: (issue, ctx) => ({ message: "Моля, изберете мерна единица." }),
   }),
 });
@@ -75,7 +76,7 @@ export default function CreateProductBottomSheet({ setIsOpened }) {
           label="Мерна единица"
           id="create-product-measurement-unit"
           name="product-measurement-unit"
-          values={["килограм", "литър"]}
+          values={Object.keys(measurementUnitMappings)}
           placeholder="Изберете"
           rhfRegister={register("measurementUnit")}
           className="mt-4"

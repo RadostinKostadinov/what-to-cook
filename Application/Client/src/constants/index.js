@@ -9,6 +9,10 @@ export const LANGUAGES = [
 export const measurementUnitMappings = {
   килограм: "кг",
   литър: "л",
+  грам: "гр",
+  милилитър: "мл",
+  брой: "бр",
+  няма: "",
 };
 
 export const recipeCategories = ["Супи", "Предястия", "Основни", "Десерти"];
