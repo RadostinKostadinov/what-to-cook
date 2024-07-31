@@ -73,13 +73,15 @@ body,
 input[type="checkbox"] {
   position: relative;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 input[type="checkbox"]:before {
   content: "";
   display: block;
   position: absolute;
-  width: 17px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   top: 0;
   left: 0;
   border: 2px solid theme("colors.app-darkBlue");
@@ -91,13 +93,14 @@ input[type="checkbox"]:checked:before {
 }
 input[type="checkbox"]:checked:after {
   content: "X";
+  border: 3px solid theme("colors.app-lightBlue");
+  border-radius: 3px;
   display: block;
-  width: 5px;
-  height: 10px;
+  width: 30px;
+  height: 30px;
   position: absolute;
   font-weight: bolder;
   color: theme("colors.app-lightBlue");
-  font-size: 18px;
-  top: -4px;
-  left: 2px;
+  font-size: 36px;
+  line-height: 0.7;
 }

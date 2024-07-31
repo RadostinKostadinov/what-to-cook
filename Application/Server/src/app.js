@@ -32,7 +32,7 @@ app.use(compression());
 
 // Cors options
 
-const allowedOrigins = ['http://localhost:3000', 'http://192.168.7.3:3000'];
+const allowedOrigins = ['http://localhost:3000', 'http://192.168.7.4:3000'];
 
 const corsOptions = {
   origin: (origin, callback) => {

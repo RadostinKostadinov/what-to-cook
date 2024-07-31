@@ -27,6 +27,7 @@ import { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MyRecipes from "./views/MyRecipes.jsx";
 import Recipe from "./views/MyRecipes/Recipe.jsx";
+import FindRecipe from "./views/FindRecipe.jsx";
 
 const queryClient = new QueryClient();
 
@@ -44,7 +45,9 @@ const router = createBrowserRouter(
           <Route index element={<MyRecipes />}></Route>
           <Route path="recipe" element={<Recipe />}></Route>
         </Route>
-        <Route path="find-recipe" element={<ForgotPassword />} />
+        <Route path="find-recipe">
+          <Route index element={<FindRecipe />}></Route>
+        </Route>
       </Route>
       <Route
         path="/auth"
