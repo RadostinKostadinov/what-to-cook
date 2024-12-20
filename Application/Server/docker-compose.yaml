@@ -1,0 +1,39 @@
+version: '3'
+services:
+  api-server:
+    image: api-v1.0.0
+    environment:
+      # Node environment
+      - NODE_ENV=development
+      # Port number
+      - PORT=8810
+      # URL of the Mongo DB
+      - MONGODB_URL=mongodb://mongo:27017/what-to-cook-app
+      - CLIENT_URL=http://localhost:3001
+      - BASE_URL=http://localhost:8810/api
+      # JWT secret key
+      - JWT_SECRET=
+      # Number of minutes after which an access token expires
+      - JWT_ACCESS_EXPIRATION_MINUTES=5
+      # Number of days after which a refresh token expires
+      - JWT_REFRESH_EXPIRATION_DAYS=30
+      # Number of minutes after which a reset password token expires
+      - JWT_RESET_PASSWORD_EXPIRATION_MINUTES=10
+      # Number of minutes after which a verify email token expires
+      - JWT_VERIFY_EMAIL_EXPIRATION_MINUTES=10
+      # SMTP configuration options for the email service
+      # For testing, you can use a fake SMTP service like Ethereal: https://ethereal.email/create
+      - SMTP_HOST=
+      - SMTP_PORT=
+      - SMTP_USERNAME=
+      - SMTP_PASSWORD=
+      - EMAIL_FROM=
+    ports:
+      - "9000:8810"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
