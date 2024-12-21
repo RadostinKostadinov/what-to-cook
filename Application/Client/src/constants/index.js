@@ -1,4 +1,4 @@
-export const API_URL = "http://192.168.7.4:8810";
+export const API_URL = "http://localhost:9000";
 export const ENV = "development";
 
 export const LANGUAGES = [
