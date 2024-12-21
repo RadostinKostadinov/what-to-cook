@@ -1,4 +1,4 @@
-export const API_URL = "http://localhost:9000";
+export const API_URL = "http://localhost:8810";
 export const ENV = "development";
 
 export const LANGUAGES = [
