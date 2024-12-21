@@ -12,7 +12,7 @@ services:
       - CLIENT_URL=http://localhost:3000
       - BASE_URL=http://localhost:8810/api
       # JWT secret key
-      - JWT_SECRET=
+      - JWT_SECRET=asdasdasdasdasdasdasdasdasd
       # Number of minutes after which an access token expires
       - JWT_ACCESS_EXPIRATION_MINUTES=5
       # Number of days after which a refresh token expires
@@ -23,18 +23,22 @@ services:
       - JWT_VERIFY_EMAIL_EXPIRATION_MINUTES=10
       # SMTP configuration options for the email service
       # For testing, you can use a fake SMTP service like Ethereal: https://ethereal.email/create
-      - SMTP_HOST=
-      - SMTP_PORT=
-      - SMTP_USERNAME=
-      - SMTP_PASSWORD=
-      - EMAIL_FROM=
+      - SMTP_HOST=smtp.ethereal.email
+      - SMTP_PORT=587
+      - SMTP_USERNAME=jacky87@ethereal.email
+      - SMTP_PASSWORD=zFcFW5VYeqpKzrQU9p
+      - EMAIL_FROM=rado_test@ethereal.email
     ports:
-      - "9000:8810"
+      - "8810:8810"
     depends_on:
       - mongo
 
   mongo:
     image: mongo:latest
+    environment:
+      - MONGO_INITDB_DATABASE=what-to-cook-app
+    volumes:
+      - ./mongo-seed.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     ports:
       - "27017:27017"
 
