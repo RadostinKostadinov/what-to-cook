@@ -9,7 +9,7 @@ services:
       - PORT=8810
       # URL of the Mongo DB
       - MONGODB_URL=mongodb://mongo:27017/what-to-cook-app
-      - CLIENT_URL=http://localhost:3001
+      - CLIENT_URL=http://localhost:3000
       - BASE_URL=http://localhost:8810/api
       # JWT secret key
       - JWT_SECRET=
@@ -37,3 +37,9 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
+
+  client:
+    image: what-to-cook-client
+    ports:
+      - "3000:3000"
+    command: npm start
