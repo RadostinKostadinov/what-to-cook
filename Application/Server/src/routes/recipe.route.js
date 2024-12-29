@@ -21,13 +21,14 @@ const upload = multer({ storage });
 
 const router = express.Router();
 
+router.post('/', isAuthenticated, validateReqData(RecipeValidations.findRecipes), recipeController.findRecipes);
 router.get('/user/', isAuthenticated, recipeController.getCurrentUserRecipes);
 router.post(
   '/user/',
   isAuthenticated,
   upload.single('image'),
   validateReqData(RecipeValidations.postRecipe),
-  recipeController.postRecipe
+  recipeController.createRecipe
 );
 router.delete(
   '/user/:id',

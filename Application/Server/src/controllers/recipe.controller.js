@@ -7,8 +7,16 @@ import catchAsync from '../utils/error_handler/catchAsync.js';
 import unifiedResponse from '../utils/unifiedResponse.js';
 import logger from '../config/logger.js';
 
-// Add new recipe to current user recipe's  =>  /api/product/
-export const postRecipe = catchAsync(async (req, res) => {
+// Find recipes by query (category, group & source)
+export const findRecipes = catchAsync(async (req, res) => {
+  const { categories, groups, sources } = req.validatedData.body;
+  const recipes = await recipeService.findRecipes(req.user.id, sources, categories, groups);
+
+  return res.status(httpStatus.OK).json(unifiedResponse.success(httpStatus.OK, 'Recipes found', { recipes }));
+});
+
+// Add new recipe to current user recipes list
+export const createRecipe = catchAsync(async (req, res) => {
   const recipeData = {
     ...req.validatedData.body.recipe,
     owner: req.user.id,

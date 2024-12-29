@@ -13,5 +13,11 @@ const groups = {
   Others: 'Други',
 };
 
+const sources = {
+  own: 'лични',
+  friends: 'приятели',
+  public: 'публични',
+};
+
 const MAX_RECIPE_IMAGE_SIZE = 5000000; // 5MB
-export default { categories, groups, MAX_RECIPE_IMAGE_SIZE };
+export default { categories, groups, sources, MAX_RECIPE_IMAGE_SIZE };

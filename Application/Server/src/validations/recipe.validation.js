@@ -2,6 +2,23 @@ import Joi from 'joi';
 import { mongoId } from './common.validation.js';
 import { recipes } from '../config/index.js';
 
+export const findRecipes = {
+  body: Joi.object().keys({
+    sources: Joi.array()
+      .items(Joi.string().valid(...Object.values(recipes.sources)))
+      .required()
+      .min(1),
+    categories: Joi.array()
+      .items(Joi.string().valid(...Object.values(recipes.categories)))
+      .required()
+      .min(1),
+    groups: Joi.array()
+      .items(Joi.string().valid(...Object.values(recipes.groups)))
+      .required()
+      .min(1),
+  }),
+};
+
 export const postRecipe = {
   file: Joi.object().keys({
     fieldname: Joi.string().valid('image'),
