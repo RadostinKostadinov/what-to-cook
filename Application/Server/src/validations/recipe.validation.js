@@ -10,12 +10,18 @@ export const findRecipes = {
       .min(1),
     categories: Joi.array()
       .items(Joi.string().valid(...Object.values(recipes.categories)))
-      .required()
-      .min(1),
+      .empty(Joi.array().length(0))
+      .default(Object.values(recipes.categories)),
     groups: Joi.array()
       .items(Joi.string().valid(...Object.values(recipes.groups)))
-      .required()
-      .min(1),
+      .empty(Joi.array().length(0))
+      .default(Object.values(recipes.groups)),
+  }),
+};
+
+export const getRecipe = {
+  params: Joi.object().keys({
+    recipeId: Joi.custom(mongoId).required(),
   }),
 };
 

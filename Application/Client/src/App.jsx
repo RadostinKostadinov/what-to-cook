@@ -26,8 +26,9 @@ import "./services/multilang-i18n/i18n.js";
 import { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MyRecipes from "./views/MyRecipes.jsx";
-import Recipe from "./views/MyRecipes/Recipe.jsx";
+import RecipeForm from "./views/MyRecipes/RecipeForm.jsx";
 import FindRecipe from "./views/FindRecipe.jsx";
+import ViewRecipe from "./views/FindRecipe/ViewRecipe";
 
 const queryClient = new QueryClient();
 
@@ -43,10 +44,11 @@ const router = createBrowserRouter(
         </Route>
         <Route path="my-recipes">
           <Route index element={<MyRecipes />}></Route>
-          <Route path="recipe" element={<Recipe />}></Route>
+          <Route path="recipe" element={<RecipeForm />}></Route>
         </Route>
         <Route path="find-recipe">
           <Route index element={<FindRecipe />}></Route>
+          <Route path="recipe/:id" element={<ViewRecipe />}></Route>
         </Route>
       </Route>
       <Route

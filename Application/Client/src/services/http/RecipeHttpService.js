@@ -61,4 +61,24 @@ export default class RecipeHttpService {
       throw err.response.data;
     }
   }
+
+  async findRecipes(data) {
+    try {
+      const response = await this.api.post("/api/recipe/", data);
+
+      return response.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
+
+  async getRecipe(recipeId) {
+    try {
+      const response = await this.api.get(`/api/recipe/${recipeId}`);
+
+      return response.data;
+    } catch (err) {
+      throw err.response.data;
+    }
+  }
 }

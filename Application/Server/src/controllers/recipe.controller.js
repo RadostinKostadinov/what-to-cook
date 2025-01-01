@@ -15,6 +15,13 @@ export const findRecipes = catchAsync(async (req, res) => {
   return res.status(httpStatus.OK).json(unifiedResponse.success(httpStatus.OK, 'Recipes found', { recipes }));
 });
 
+export const getRecipe = catchAsync(async (req, res) => {
+  const { recipeId } = req.params;
+  const recipe = await recipeService.getRecipe(recipeId);
+
+  return res.status(httpStatus.OK).json(unifiedResponse.success(httpStatus.OK, 'Recipe found', { recipe }));
+});
+
 // Add new recipe to current user recipes list
 export const createRecipe = catchAsync(async (req, res) => {
   const recipeData = {
@@ -50,7 +57,7 @@ export const createRecipe = catchAsync(async (req, res) => {
     });
   }
 
-  return res.status(httpStatus.CREATED).json(unifiedResponse.success(httpStatus.CREATED, 'Recipe posted!', {}));
+  return res.status(httpStatus.CREATED).json(unifiedResponse.success(httpStatus.CREATED, 'RecipeForm posted!', {}));
 });
 
 // Get current user recipes
@@ -75,5 +82,5 @@ export const deleteCurrentUserRecipe = catchAsync(async (req, res) => {
     }
   });
 
-  return res.status(httpStatus.OK).json(unifiedResponse.success(httpStatus.OK, 'Recipe deleted', {}));
+  return res.status(httpStatus.OK).json(unifiedResponse.success(httpStatus.OK, 'RecipeForm deleted', {}));
 });

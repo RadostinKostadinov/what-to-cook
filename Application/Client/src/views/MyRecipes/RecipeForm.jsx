@@ -3,7 +3,7 @@ import TextInput from "../../components/TextInput";
 import TextInputWithMeasurementUnit from "../../components/TextInputWithMeasurementUnit";
 import Title from "../../components/Title";
 import { useState } from "react";
-import ProductsInRecipe from "../../components/MyRecipes/CreateRecipe/ProductsInRecipe";
+import ProductsInRecipe from "../../components/Recipes/CreateRecipe/ProductsInRecipe";
 import TextArea from "../../components/TextArea";
 import ImageInput from "../../components/ImageInput";
 import TextInputAutocomplete from "../../components/TextInputAutocomplete";
@@ -74,7 +74,7 @@ const recipeSchema = z
     { path: ["image"], message: "Размерът на файла е по-голям от 5MB" }
   );
 
-export default function Recipe() {
+export default function RecipeForm() {
   const queryClient = useQueryClient();
   const api = HttpService.getInstance();
   const location = useLocation();
@@ -149,8 +149,6 @@ export default function Recipe() {
     }
 
     formData.append("recipe", JSON.stringify(dataToSend));
-
-    console.log(Array.from(formData.keys()));
 
     try {
       await api.Recipe.addUserRecipe(formData);

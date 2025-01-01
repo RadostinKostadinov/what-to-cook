@@ -23,6 +23,7 @@ const router = express.Router();
 
 router.post('/', isAuthenticated, validateReqData(RecipeValidations.findRecipes), recipeController.findRecipes);
 router.get('/user/', isAuthenticated, recipeController.getCurrentUserRecipes);
+router.get('/:recipeId', isAuthenticated, validateReqData(RecipeValidations.getRecipe), recipeController.getRecipe);
 router.post(
   '/user/',
   isAuthenticated,

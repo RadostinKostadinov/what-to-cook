@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import toJSON from '../plugins/toJSON.plugin.js';
 import { productsConfig } from '../../config/index.js';
 
-const productSchema = new mongoose.Schema(
+export const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
     },
     measurementUnit: {
       type: String,
-      enum: Object.values(productsConfig.productMeasurementUnits),
+      // enum: Object.values(productsConfig.productMeasurementUnits),
       required: true,
     },
   },

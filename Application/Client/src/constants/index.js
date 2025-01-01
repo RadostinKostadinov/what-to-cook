@@ -15,7 +15,7 @@ export const measurementUnitMappings = {
   няма: "",
 };
 
-export const recipeCategories = ["Супи", "Предястия", "Основни", "Десерти"];
+export const recipeCategories = ["Супи", "Предястия", "Основни", "Десерти", "Други"];
 export const recipeGroups = [
   "Пилешки ястия",
   "Свински ястия",

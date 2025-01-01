@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import toJSON from '../plugins/toJSON.plugin.js';
 
-const recipeSchema = new mongoose.Schema(
+export const recipeSchema = new mongoose.Schema(
   {
     name: {
       type: String,

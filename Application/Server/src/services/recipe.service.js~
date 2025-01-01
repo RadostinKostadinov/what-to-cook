@@ -85,19 +85,6 @@ export const findRecipes = async (userId, sources, categories, groups) => {
   }
 };
 
-export const getRecipe = async (recipeId) => {
-  try {
-    return await Recipe.findById(recipeId).populate('products.product');
-  } catch (error) {
-    throw new DatabaseError(
-      'GET_RECIPE_ERROR',
-      httpStatus.BAD_REQUEST,
-      true,
-      `The data sent to the database was invalid. - DB_RES: ${error.message}`
-    );
-  }
-};
-
 export const postRecipe = async (recipeBody, recipeId) => {
   try {
     return await Recipe.updateOne({ _id: recipeId }, recipeBody, { upsert: true });
